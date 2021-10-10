@@ -1,4 +1,4 @@
-import { App } from 'vue'
+import type { App } from 'vue'
 // import 'element-plus/theme-chalk/base.css'
 import { ElButton } from 'element-plus'
 

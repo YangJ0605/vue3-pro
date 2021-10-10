@@ -19,7 +19,8 @@ module.exports = {
         'anno',
         'update',
         'init',
-        'WIP'
+        'WIP',
+        'mv'
       ]
     ],
     'type-case': [0],
