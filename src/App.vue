@@ -2,6 +2,7 @@
   <img alt="Vue logo" src="./assets/logo.png" />
   <router-link to="/login">login</router-link>
   <router-link to="/home">home</router-link>
+  <div>{{ $store.state.count }}</div>
   <router-view></router-view>
 </template>
 
