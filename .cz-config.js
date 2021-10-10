@@ -1,4 +1,4 @@
-'use strict'
+/* eslint-disable */
 // https://gitmoji.dev/ 更多表情相关
 // 相关文档 https://juejin.cn/post/6844903805499375630
 // 检测提交信息 https://juejin.cn/post/6887391877801672711

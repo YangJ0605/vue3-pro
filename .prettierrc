@@ -8,5 +8,6 @@
   "endOfLine": "auto",
   "printWidth": 120,
   "bracketSpacing": true,
-  "arrowParens": "avoid"
+  "arrowParens": "avoid",
+  "quoteProps": "as-needed"
 }

@@ -17,12 +17,15 @@ module.exports = {
   rules: {
     'prettier/prettier': [
       'warn',
-      {},
+      {
+        singleQuote: true
+      },
       {
         usePrettierrc: true
       }
     ],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    quotes: ['warn', 'single']
   }
 }
