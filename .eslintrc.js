@@ -26,6 +26,8 @@ module.exports = {
     ],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    '@typescript-eslint/no-var-requires': 'off'
+    '@typescript-eslint/no-var-requires': 'off',
+    'space-before-function-paren': ['warn', { anonymous: 'ignore', named: 'never' }]
+    // 'vue/html-quotes': ['warn', 'single']
   }
 }

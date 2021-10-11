@@ -3,15 +3,33 @@
   <router-link to="/login">login</router-link>
   <router-link to="/home">home</router-link>
   <div>{{ $store.state.count }}</div>
+  <div>{{ name }}</div>
+  <el-button type="primary" @click="changeName">changeName</el-button>
+  <hello-vue></hello-vue>
   <router-view></router-view>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
+import helloVue from './components/hello.vue'
 
 export default defineComponent({
   name: 'App',
-  components: {}
+  components: { helloVue },
+  setup() {
+    const name = ref('da')
+    const changeName = () => {
+      if (name.value === 'cc') {
+        name.value = 'dd'
+      } else {
+        name.value = 'cc'
+      }
+    }
+    return {
+      name,
+      changeName
+    }
+  }
 })
 </script>
 
