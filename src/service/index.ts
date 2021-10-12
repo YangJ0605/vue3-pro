@@ -1,9 +1,20 @@
 import Request from './request'
 import { TIME_OUT, BASE_URL } from './request/config'
 
-const request = new Request({
+const service = new Request({
   baseURL: BASE_URL,
   timeout: TIME_OUT
 })
 
-export default request
+service.addRequestInterceptor(config => {
+  if (!config.headers) {
+    config.headers = {}
+  }
+  config.headers['token'] = 'token 123'
+  return config
+})
+service.addResponseInterceptor(res => {
+  return res
+})
+
+export default service

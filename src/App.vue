@@ -10,14 +10,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
 import helloVue from './components/hello.vue'
+import service from '@/service'
 
 export default defineComponent({
   name: 'App',
   components: { helloVue },
   setup() {
     const name = ref('da')
+
+    onMounted(() => {
+      service.get<{ name: string }>({ url: '/user', showLoading: false }).then(res => console.log(res))
+    })
+
     const changeName = () => {
       if (name.value === 'cc') {
         name.value = 'dd'
