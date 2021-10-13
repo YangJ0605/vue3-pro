@@ -40,7 +40,6 @@ export default defineComponent({
     const phoneRef = ref<InstanceType<typeof LoginPhone>>()
     const currentTab = ref<'account' | 'phone'>('account')
 
-    // // 2.定义方法
     const handleLoginClick = () => {
       if (currentTab.value === 'account') {
         accountRef.value?.loginAction()
