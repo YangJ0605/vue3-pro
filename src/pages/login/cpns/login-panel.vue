@@ -42,7 +42,7 @@ export default defineComponent({
 
     const handleLoginClick = () => {
       if (currentTab.value === 'account') {
-        accountRef.value?.loginAction()
+        accountRef.value?.loginAction(isKeepPassword.value)
       } else {
         console.log('phone login')
       }

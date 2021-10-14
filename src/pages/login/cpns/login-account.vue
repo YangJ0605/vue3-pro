@@ -12,6 +12,7 @@
 </template>
 
 <script lang="ts">
+import storage from '@/utils/storage'
 import { ElForm } from 'element-plus'
 import { defineComponent, reactive, ref } from 'vue'
 
@@ -21,13 +22,21 @@ export default defineComponent({
   setup() {
     const formRef = ref<InstanceType<typeof ElForm>>()
     const account = reactive({
-      name: '',
-      password: ''
+      name: storage.get('name') ?? '',
+      password: storage.get('password') ?? ''
     })
 
-    const loginAction = () => {
+    const loginAction = (isKeepPassword: boolean) => {
       formRef.value?.validate(valid => {
-        console.log(valid)
+        if (valid) {
+          if (isKeepPassword) {
+            storage.set('name', account.name)
+            storage.set('password', account.password)
+          } else {
+            storage.remove('name')
+            storage.remove('password')
+          }
+        }
       })
     }
 
