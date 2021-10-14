@@ -15,11 +15,14 @@
 import storage from '@/utils/storage'
 import { ElForm } from 'element-plus'
 import { defineComponent, reactive, ref } from 'vue'
+import { useStore } from 'vuex'
 
 import { rules } from '../validations/accout'
 
 export default defineComponent({
   setup() {
+    const store = useStore()
+
     const formRef = ref<InstanceType<typeof ElForm>>()
     const account = reactive({
       name: storage.get('name') ?? '',
@@ -36,6 +39,8 @@ export default defineComponent({
             storage.remove('name')
             storage.remove('password')
           }
+
+          store.dispatch('login/accountLoginAction', { ...account })
         }
       })
     }

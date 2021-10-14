@@ -1,3 +1,4 @@
+import storage from '@/utils/storage'
 import Request from './request'
 import { TIME_OUT, BASE_URL } from './request/config'
 
@@ -10,7 +11,10 @@ service.addRequestInterceptor(config => {
   if (!config.headers) {
     config.headers = {}
   }
-  config.headers['token'] = 'token 123'
+  const token = storage.get('token')
+  if (token) {
+    config.headers['Authorization'] = `Bearer ${token}`
+  }
   return config
 })
 service.addResponseInterceptor(res => {
