@@ -1,19 +1,21 @@
 import storage from '@/utils/storage'
-import { loginRequest } from './../../service/login'
+import { loginRequest, requestUserInfoById, requestUserMenusByRoleId } from './../../service/login'
 import { IRootState } from './../index'
 import { Module } from 'vuex'
-
+import router from '@/router'
 interface ILoginState {
   token: string
   userInfo: any
+  userMenus: any[]
 }
 
 const loginModule: Module<ILoginState, IRootState> = {
   namespaced: true,
   state() {
     return {
-      token: '',
-      userInfo: {}
+      token: storage.get('token') ?? '',
+      userInfo: storage.get('userInfo') ?? {},
+      userMenus: storage.get('userMenus') ?? []
     }
   },
   mutations: {
@@ -22,18 +24,32 @@ const loginModule: Module<ILoginState, IRootState> = {
     },
     changeUserInfo(state, userInfo: any) {
       state.userInfo = userInfo
+    },
+    changeUserMenus(state, userMenus: any[]) {
+      state.userMenus = userMenus
     }
   },
   getters: {},
   actions: {
     async accountLoginAction({ commit }, payload: any) {
       console.log('login account action')
-      const res = await loginRequest(payload)
-      const { code, data } = res
-      if (code === 0) {
-        commit('changeToken', data.token)
-        storage.set('token', data.token)
-      }
+      const loginRes = await loginRequest(payload)
+      const { token, id } = loginRes.data
+
+      commit('changeToken', token)
+      storage.set('token', token)
+
+      const userInfoRes = await requestUserInfoById(id)
+      const userInfo = userInfoRes.data
+      commit('changeUserInfo', userInfo)
+      storage.set('userInfo', userInfo)
+
+      const userMeunsRes = await requestUserMenusByRoleId(userInfo.role.id)
+      const userMenus = userMeunsRes.data
+      commit('changeUserMenus', userMenus)
+      storage.set('userMenus', userMenus)
+
+      router.push('/home')
     }
   }
 }

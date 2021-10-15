@@ -1,10 +1,11 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
+import storage from '@/utils/storage'
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/login'
+    redirect: '/home'
   },
   {
     path: '/login',
@@ -19,6 +20,20 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes
+})
+
+router.beforeEach(to => {
+  console.log('to', to)
+  const token = storage.get('token')
+  if (to.path !== '/login') {
+    if (!token) {
+      return '/login'
+    }
+  } else {
+    if (token) {
+      return '/home'
+    }
+  }
 })
 
 export default router
