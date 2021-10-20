@@ -5,7 +5,7 @@ import storage from '@/utils/storage'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/main'
   },
   {
     path: '/login',
@@ -31,7 +31,7 @@ router.beforeEach(to => {
     }
   } else {
     if (token) {
-      return '/home'
+      return '/main'
     }
   }
 })

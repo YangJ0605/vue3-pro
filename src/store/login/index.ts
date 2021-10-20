@@ -3,7 +3,7 @@ import { loginRequest, requestUserInfoById, requestUserMenusByRoleId } from './.
 import { IRootState } from './../index'
 import { Module } from 'vuex'
 import router from '@/router'
-interface ILoginState {
+export interface ILoginState {
   token: string
   userInfo: any
   userMenus: any[]
@@ -49,7 +49,7 @@ const loginModule: Module<ILoginState, IRootState> = {
       commit('changeUserMenus', userMenus)
       storage.set('userMenus', userMenus)
 
-      router.push('/home')
+      router.push('/main')
     }
   }
 }

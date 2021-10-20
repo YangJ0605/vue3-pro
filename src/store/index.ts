@@ -1,5 +1,5 @@
-import { createStore } from 'vuex'
-import login from './login'
+import { createStore, Store, useStore as useVuexStore } from 'vuex'
+import login, { ILoginState } from './login'
 export interface IRootState {
   count: number
 }
@@ -15,5 +15,13 @@ const store = createStore<IRootState>({
     login
   }
 })
+
+export type StoreType = IRootState & {
+  login: ILoginState
+}
+
+export const useStore = (): Store<StoreType> => {
+  return useVuexStore()
+}
 
 export default store
